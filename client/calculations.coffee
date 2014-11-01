@@ -45,6 +45,8 @@ class ExMatrix extends Matrix
         result[i][j] = sum;
     result
 
+Transform = famous.core.Transform
+
 Template.hello.helpers
   matrix: ->
     m = new ExMatrix [
@@ -59,4 +61,4 @@ Template.hello.helpers
     prod = new ExMatrix (m.multiplyNoRegister inv.get())
     txt += 'Product of initial matrix and its inverse should lead to identity:'
     txt += '\n' + prod.toString() + '\n'
-    txt
+    txt += Transform.translate 0, 0, 0
