@@ -6,6 +6,11 @@ class ExMatrix extends Matrix
     M[0]
     "#{M[0]}\n#{M[1]}\n#{M[2]}"
 
-Template.hello.rendered = ->
-  m = new ExMatrix
-  console.log m.toString()
+Template.hello.helpers
+  matrix: ->
+    m = new ExMatrix [
+      [2, 0, 0]
+      [0, 2, 0]
+      [0, 0, 2]
+    ]
+    m.toString()
