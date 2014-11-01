@@ -33,6 +33,17 @@ class ExMatrix extends Matrix
         (det2 M[0][0], M[0][1], M[1][0], M[1][1]) / detM
       ]
     ]
+  multiplyNoRegister: (M2) ->
+    M1 = @get()
+    result = Array (Array 3), (Array 3), (Array 3)
+    for i in [0...3]
+      result[i] = []
+      for j in [0...3]
+        sum = 0
+        for k in [0...3]
+          sum += M1[i][k] * M2[k][j]
+        result[i][j] = sum;
+    result
 
 Template.hello.helpers
   matrix: ->
@@ -45,6 +56,7 @@ Template.hello.helpers
     txt += 'Determinant: ' + m.det() + '\n'
     inv = new ExMatrix m.inverse()
     txt += 'Inverse matrix:\n' + inv.toString() + '\n'
-    console.log m
-    console.log m.multiply inv.get()
+    prod = new ExMatrix (m.multiplyNoRegister inv.get())
+    txt += 'Product of initial matrix and its inverse should lead to identity:'
+    txt += '\n' + prod.toString() + '\n'
     txt
